@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>DCECE 2027 Prep Tracker</title>
+<style>
+:root{--bg:#f5f0e4;--cd:#fffdf7;--ink:#14213d;--mu:#667085;--ln:#e2dac7;--ok:#2f7d4f;--wn:#a8611a;--bd:#b3392f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1527;--cd:#17213a;--ink:#ece7da;--mu:#9aa5bd;--ln:#2a3654}}
+:root[data-theme="dark"]{--bg:#0e1527;--cd:#17213a;--ink:#ece7da;--mu:#9aa5bd;--ln:#2a3654}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--ink);font:15px/1.5 Georgia,'Times New Roman',serif;padding-bottom:76px}
+button,input,select,textarea{font:14px system-ui,-apple-system,sans-serif;color:var(--ink)}
+header{padding:14px 16px 4px}header b{font-size:19px}header small{display:block;color:var(--mu);font:12px system-ui}
+#app{padding:8px 16px;max-width:640px;margin:auto}h2{font-size:17px;margin:18px 0 8px}
+.cd{background:var(--cd);border:1px solid var(--ln);border-radius:10px;padding:12px;margin:8px 0}
+.row{cursor:pointer}.sm{font:12.5px system-ui;color:var(--mu)}.big{font-size:34px;font-weight:700}
+.bar{height:7px;background:var(--ln);border-radius:4px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--ink)}
+.ok{color:var(--ok)}.wn{color:var(--wn)}.bd{color:var(--bd)}
+.tag{display:inline-block;font:12px system-ui;border:1px solid var(--ln);border-radius:12px;padding:1px 9px;margin:2px 4px 2px 0}
+.tag.dn{background:var(--ok);color:#fff;border-color:var(--ok)}
+button{background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:9px 13px;cursor:pointer}button.g{background:none;color:var(--ink);border:1px solid var(--ln)}button:disabled{opacity:.4}
+input,select,textarea{background:var(--cd);border:1px solid var(--ln);border-radius:8px;padding:8px;width:100%;margin:3px 0}input[type=checkbox]{width:20px;height:20px;margin:0 8px 0 0;vertical-align:middle}
+.ck{display:flex;align-items:center;padding:5px 0}.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fl{display:flex;gap:6px;flex-wrap:wrap;align-items:center}.fl>*{width:auto}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--cd);border-top:1px solid var(--ln);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;background:none;color:var(--mu);border-radius:0;padding:13px 2px;font-size:12px}nav button.on{color:var(--ink);font-weight:700;box-shadow:inset 0 2px var(--ink)}
+.x{border-style:dashed;opacity:.9}#t{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--ok);color:#fff;padding:9px 16px;border-radius:20px;font:14px system-ui;display:none;z-index:9}
+:focus-visible{outline:2px solid var(--wn)}
+</style></head><body>
+<header><b>DCECE 2027 Prep Tracker</b><small>2026 baseline — update when the official DCECE 2027 prospectus is released.</small></header>
+<div id="app"></div><div id="t"></div>
+<nav id="nv"></nav>
+<script>
+const S=[{id:'m',name:'Mathematics',ch:[
+['Real Numbers','Euclid division algorithm;Fundamental theorem of arithmetic;Irrationality;Decimal expansions;HCF/LCM;Rational/irrational classification'],
+['Polynomials','Zeros;Relationship between zeros and coefficients;Division algorithm;Factorisation;Algebraic identities'],
+['Pair of Linear Equations in Two Variables','Graphical solution;Consistency;Substitution;Elimination;Cross multiplication;Word problems'],
+['Quadratic Equations','Standard form;Factorisation;Completing square / formula method;Discriminant and nature of roots;Word problems'],
+['Arithmetic / Commercial Mathematics','Percentage;Ratio and proportion;Profit, loss and discount;Simple interest;Compound interest;Successive percentage change and applications'],
+['Geometry — Triangles','Similarity;Congruence;Basic Proportionality Theorem;Pythagoras theorem;Area relationships'],
+['Geometry — Circles','Tangent properties;Chord/angle relationships;Basic circle theorems'],
+['Coordinate Geometry','Cartesian plane;Distance formula;Section formula;Midpoint;Area of triangle;Graph interpretation'],
+['Trigonometry','Trigonometric ratios;Standard angles;Identities;Complementary angles;Heights and distances'],
+['Areas Related to Circles','Circumference;Area;Sector;Segment;Composite figures'],
+['Surface Areas and Volumes','Cube;Cuboid;Cylinder;Cone;Sphere;Hemisphere;Combinations;Unit conversions'],
+['Statistics','Data;Grouped data;Mean;Median;Mode;Cumulative frequency;Interpretation'],
+['Probability','Classical probability;Sample space;Elementary events']]},
+{id:'p',name:'Physics',ch:[
+['Units and Measurements','SI units;Conversions;Measurement basics;Accuracy'],
+['Motion','Distance and displacement;Speed and velocity;Acceleration;Equations of motion;Motion graphs;Uniform/non-uniform motion'],
+['Force and Laws of Motion','Inertia;Newton\'s laws;Momentum;Conservation of momentum;Everyday applications'],
+['Gravitation','Universal law;Free fall;g;Mass and weight;Pressure;Buoyancy;Archimedes principle;Density'],
+['Work, Energy and Power','Work;Kinetic and potential energy;Conservation of energy;Power;Numericals'],
+['Sound','Production;Propagation;Characteristics;Speed;Reflection;Echo and reverberation;Human hearing;Ultrasound'],
+['Light — Reflection','Laws of reflection;Mirrors;Ray diagrams;Mirror formula;Magnification'],
+['Light — Refraction','Laws of refraction;Refractive index;Lenses;Ray diagrams;Lens formula;Magnification'],
+['Human Eye','Structure;Accommodation;Defects;Correction;Dispersion and scattering basics'],
+['Electricity','Charge and current;Potential difference;Resistance;Ohm\'s law;Resistivity;Series/parallel circuits;Heating effect;Electric power and energy;Household electricity;Numericals'],
+['Magnetic Effects of Electric Current','Magnetic field;Field lines;Current-carrying conductor;Solenoid;Force on conductor;Electromagnetic induction basics;Domestic applications'],
+['Sources of Energy','Renewable/non-renewable;Conventional/non-conventional;Characteristics;Environmental impact']]},
+{id:'c',name:'Chemistry',ch:[
+['Matter and Its Properties','States of matter;Particle nature;Physical changes;Mixtures;Solutions, suspensions, colloids;Separation methods;Basic concentration'],
+['Atoms and Molecules','Laws of chemical combination;Atomic/molecular mass;Basic mole concept;Formula calculations'],
+['Structure of Atom','Subatomic particles;Atomic models;Shells;Valency;Isotopes;Isobars'],
+['Periodic Classification of Elements','Modern periodic table;Groups and periods;Basic trends;Valency;Metallic/non-metallic character'],
+['Chemical Bonding / Basic Chemical Concepts','Ionic bonding;Covalent bonding;Electron transfer/sharing;Basic Lewis structures;Valency;Properties'],
+['Chemical Reactions and Equations','Reaction types;Balancing;Oxidation/reduction basics;Observations;Basic energy changes'],
+['Acids, Bases and Salts','Properties;Indicators;pH;Reactions;Common salts;Preparation and uses'],
+['Metals and Non-metals','Physical/chemical properties;Reactivity series;Ionic compounds;Extraction basics;Corrosion and prevention'],
+['Carbon and Its Compounds','Covalent nature;Hydrocarbons;Functional groups;Homologous series;Nomenclature;Reactions;Soaps and detergents'],
+['Important Chemical Processes','Common chemical processes;Separation/purification;Everyday and industrial applications'],
+['Basic Environmental Chemistry','Air/water pollution;Greenhouse effect;Ozone;Acid rain;Waste and environmental protection']]}];
+const X={Mathematics:'Differentiation, Integration, Matrices, Determinants, Complex Numbers, Vectors, 3-D Geometry, Class-11-level Permutation & Combination, Advanced Probability, Differential Equations',
+Physics:'Rotational dynamics, SHM, advanced waves, Class-12-level electromagnetic induction, AC circuits, semiconductor electronics, Class-12-level nuclear physics, JEE-level modern physics',
+Chemistry:'Advanced organic reaction mechanisms, Class-11/12 thermodynamics, Class-12 electrochemistry, chemical kinetics, coordination chemistry, advanced p-block chemistry, advanced d/f-block chemistry, advanced biomolecules/polymers'};
+const C=[],CM={};S.forEach(s=>s.ch.forEach((c,i)=>{const o={id:s.id+(i+1),sid:s.id,sn:s.name,name:c[0],pri:'Must Master',tp:c[1].split(';')};C.push(o);CM[o.id]=o}));
+const TY=['Concept','Calculation','Memory','Question Reading','Silly Mistake'],LB=['Not Started','In Progress','In Progress','In Progress','Almost Done','DONE'];
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fresh=()=>({p:{},mk:[],mocks:[],st:{thr:80,theme:'system'},act:[],last:null});
+let D;try{D=JSON.parse(localStorage.getItem('dcece27'))}catch(e){}D=D||fresh();
+const save=()=>{try{localStorage.setItem('dcece27',JSON.stringify(D))}catch(e){}};
+const th=()=>{const t=D.st.theme;t=='system'?document.documentElement.removeAttribute('data-theme'):document.documentElement.dataset.theme=t};
+const P=id=>D.p[id]||(D.p[id]={c:0,n:0,m:0,y:0,yn:'',t:[],r:[0,0,0],tp:{},nt:''});
+const passed=id=>P(id).t.some(t=>t.pct>=D.st.thr);
+const stp=id=>{const p=P(id);return[p.c,p.n,p.m>=100,p.y,passed(id)].map(Boolean)};
+const cnt=id=>stp(id).filter(x=>x).length,fmt=d=>d.toLocaleDateString('en-CA'),tdy=()=>fmt(new Date());
+const started=id=>{const p=P(id);return cnt(id)>0||p.m>0||p.t.length>0||Object.values(p.tp).some(x=>x)};
+const bar=p=>`<div class="bar"><i style="width:${p}%"></i></div>`;
+const toast=m=>{const t=$('#t');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)};
+function upd(id,fn){const b=id?cnt(id):0;fn();if(!D.act.includes(tdy()))D.act.push(tdy());save();render();if(id&&b<5&&cnt(id)==5)toast('✓ Chapter DONE — all 5 verified')}
+function streak(){let n=0,d=new Date();if(!D.act.includes(fmt(d)))d.setDate(d.getDate()-1);while(D.act.includes(fmt(d))){n++;d.setDate(d.getDate()-1)}return n}
+function weak(id){const p=P(id),r=[],ts=p.t,thr=D.st.thr,n=cnt(id);
+if(ts.length&&ts[ts.length-1].pct<thr)r.push('Chapter Test: '+Math.round(ts[ts.length-1].pct)+'%');
+if(ts.filter(t=>t.pct<thr).length>=2)r.push('repeated low test scores');
+if(p.m>0&&p.m<50)r.push(`MCQs: ${p.m}/100`);
+const u=D.mk.filter(m=>m.c==id&&!m.r).length;if(u)r.push(u+' unresolved mistake'+(u>1?'s':''));
+if(r.length&&n<5)r.push((5-n)+' verification step'+(5-n>1?'s':'')+' incomplete');return r}
+function nx(id){const p=P(id),a=[];if(!p.c)a.push('finish Concept');if(!p.n)a.push('finish Notes');if(p.m<100)a.push(`complete ${100-p.m} MCQs`);if(!p.y)a.push('complete PYQs');if(!passed(id))a.push(`score ${D.st.thr}%+ in the Chapter Test`);return a.length?'Next action: '+a.join(', then ')+'.':'All 5 verified. Keep revising.'}
+const allT=()=>[...C.flatMap(c=>(D.p[c.id]?D.p[c.id].t:[]).map(t=>({...t,nm:c.name,sn:c.sn,sid:c.sid}))),...D.mocks.map(t=>({...t,sn:'Full mock',sid:'mock'}))];
+let st={v:'dash',ch:null},Q='',SUB='',ST='',TS='d',TF='',MF={s:'',c:'',t:'',r:''},mfc='';
+const go=(v)=>{st.v=v;st.ch=null;render();scrollTo(0,0)};
+const op=id=>{st.ch=id;st.v='syl';D.last=id;save();render();scrollTo(0,0)};
+const study=()=>{const c=C.find(c=>cnt(c.id)<5&&started(c.id))||C.find(c=>cnt(c.id)<5);c?op(c.id):go('syl')};
+const opt=(a,s)=>a.map(([v,l])=>`<option value="${v}" ${v==s?'selected':''}>${esc(l)}</option>`).join('');
+const set=(id,k,v)=>upd(id,()=>P(id)[k]=v);
+const tg=(id,i,v)=>upd(id,()=>P(id).tp[i]=v);
+const rv=(id,i,v)=>upd(id,()=>P(id).r[i]=v?1:0);
+const mq=(id,v)=>upd(id,()=>P(id).m=Math.max(0,Math.min(100,Math.round(+v||0))));
+function tAdd(id){const q=+$('#tq').value,s=+$('#ts').value;if(!(q>0)||s<0||s>q||isNaN(s))return toast('Enter valid questions and score (0 to questions)');
+upd(id,()=>P(id).t.push({d:$('#td').value||tdy(),q,s,pct:s/q*100,tm:+$('#tm').value||0,wk:$('#tw').value}))}
+const tdel=(id,i)=>upd(id,()=>P(id).t.splice(i,1));
+function mAdd(){const q=+$('#mq').value,s=+$('#ms').value;if(!(q>0)||s<0||s>q||isNaN(s))return toast('Enter valid questions and score');
+D.mocks.push({nm:$('#mn').value||'Full-length mock',d:$('#md').value||tdy(),q,s,pct:s/q*100,tm:+$('#mt').value||0,wk:$('#mw').value});save();render()}
+function xAdd(){const c=$('#xc').value;D.mk.push({c,tp:$('#xt').value,ty:$('#xy').value,rf:$('#xr').value,nt:$('#xn').value,d:tdy(),r:0});mfc='';upd(null,()=>{});toast('Mistake logged')}
+const xr=(i,v)=>upd(null,()=>D.mk[i].r=v?1:0),xd=i=>upd(null,()=>D.mk.splice(i,1));
+const sub=id=>{const l=C.filter(c=>c.sid==id);return Math.round(l.reduce((a,c)=>a+cnt(c.id),0)/(l.length*5)*100)};
+function tr(t){return `<div class="cd"><b>${esc(t.nm||'')}</b> <span class="sm">${esc(t.sn)} · ${esc(t.d)}</span><br>${t.s}/${t.q} = <b class="${t.pct>=D.st.thr?'ok':'bd'}">${Math.round(t.pct)}%</b> <span class="sm">· ${t.tm||0} min${t.wk?' · weak: '+esc(t.wk):''}</span></div>`}
+function chRow(c){const p=P(c.id),n=cnt(c.id),w=weak(c.id),tp=c.tp.filter((_,i)=>p.tp[i]).length,m=Q?c.tp.filter(t=>t.toLowerCase().includes(Q)):[];
+return `<div class="cd row" onclick="op('${c.id}')"><b>${esc(c.name)}</b> <span class="tag ${n==5?'dn':''}">${n}/5 ${LB[n]}</span><br><span class="sm">${c.sn} · ${c.pri} · topics ${tp}/${c.tp.length}</span>${m.length?`<br><span class="sm">Topic match: ${esc(m.join(', '))}</span>`:''}${w.length?`<br><span class="sm bd">${esc(w[0])}</span>`:''}${bar(n*20)}</div>`}
+function list(){const l=C.filter(c=>(!SUB||c.sid==SUB)&&(!Q||(c.name+' '+c.sn+' '+c.tp.join(' ')).toLowerCase().includes(Q))&&(!ST||(ST=='done'?cnt(c.id)==5:ST=='inc'?cnt(c.id)<5:ST=='weak'?weak(c.id).length:!started(c.id))));
+return l.length?l.map(chRow).join(''):'<p class="sm">No chapters match. Clear the search or filters.</p>'}
+const sRes=()=>{$('#res').innerHTML=list()};
+function dash(){const all=C.reduce((a,c)=>a+cnt(c.id),0),done=C.filter(c=>cnt(c.id)==5).length,pc=Math.round(all/(C.length*5)*100),w=C.filter(c=>weak(c.id).length).slice(0,6),rt=allT().slice(-4).reverse();
+return `<div class="cd"><div class="big">${pc}%</div>${bar(pc)}<span class="sm">Overall · ${done}/${C.length} chapters done · ${all}/${C.length*5} verification steps · 🔥 ${streak()}-day streak</span></div>
+<div class="cd">${S.map(s=>`<div class="sm">${s.name} — ${sub(s.id)}%</div>${bar(sub(s.id))}`).join('')}</div>
+${D.last?`<h2>Continue studying</h2>${chRow(CM[D.last])}`:''}
+<div class="g2"><button onclick="study()">Today's study</button><button class="g" onclick="go('syl')">Full syllabus</button><button class="g" onclick="go('tests')">Tests</button><button class="g" onclick="go('mist')">Mistake log</button></div>
+<h2>Weak chapters</h2>${w.length?w.map(c=>`<div class="cd row" onclick="op('${c.id}')"><b>${esc(c.name)}</b><br><span class="sm bd">${esc(weak(c.id).join(' · '))}</span></div>`).join(''):'<p class="sm">None flagged yet. Log tests and MCQs to see weak spots.</p>'}
+<h2>Recent tests</h2>${rt.length?rt.map(tr).join(''):'<p class="sm">No tests recorded yet.</p>'}`}
+function syl(){return `<input type="search" placeholder="Search subjects, chapters, topics" value="${esc(Q)}" oninput="Q=this.value.toLowerCase().trim();sRes()">
+<div class="fl"><select onchange="SUB=this.value;sRes()">${opt([['','All subjects'],...S.map(s=>[s.id,s.name])],SUB)}</select><select onchange="ST=this.value;sRes()">${opt([['','All status'],['done','Completed'],['inc','Incomplete'],['weak','Weak'],['ns','Not started']],ST)}</select></div>
+<p class="sm">All chapters are Must Master. Open a chapter for its topics and 5-step verification.</p><div id="res">${list()}</div>
+<h2>Not in current scope / higher-level topics</h2>${Object.entries(X).map(([k,v])=>`<div class="cd x"><b>${k}</b><br><span class="sm">${esc(v)}</span></div>`).join('')}<p class="sm">Excluded from current DCECE-PE preparation and NOT counted toward progress. Edit the <code>X</code> object in the syllabus data to change this list.</p>`}
+function chap(id){const c=CM[id],p=P(id),n=cnt(id),s=stp(id),ts=p.t,last=ts[ts.length-1],best=ts.length?Math.max(...ts.map(t=>t.pct)):null,tp=c.tp.filter((_,i)=>p.tp[i]).length,mk=D.mk.map((m,i)=>({m,i})).filter(o=>o.m.c==id&&!o.m.r),wt=[...new Set(ts.flatMap(t=>(t.wk||'').split(',').map(x=>x.trim()).filter(Boolean)))],thr=D.st.thr,ck=(k,l)=>`<label class="ck"><input type="checkbox" ${p[k]?'checked':''} onchange="set('${id}','${k}',this.checked)">${l}</label>`,m=p.m;
+const hd=(t,ok)=>`<b>${ok?'<span class="ok">✓</span>':'<span class="bd">✗</span>'} ${t}</b>`;
+return `<button class="g" onclick="st.ch=null;render()">← Back</button><p class="sm">${c.sn} → ${esc(c.name)}</p><h2 style="margin-top:0">${esc(c.name)} <span class="tag">${c.pri}</span></h2>
+<p class="sm">Goal: finish every topic, then clear all five checks.</p>
+<div class="cd"><b class="${n==5?'ok':''}">${n}/5 — ${LB[n]}</b>${bar(n*20)}<span class="sm">Topics: ${tp}/${c.tp.length} complete · DONE is set automatically from the 5 checks</span><br><b>${nx(id)}</b>${weak(id).length?`<br><span class="sm bd">${esc(weak(id).join(' · '))}</span>`:''}</div>
+<h2>Topics (${tp}/${c.tp.length})</h2><div class="cd">${c.tp.map((t,i)=>`<label class="ck"><input type="checkbox" ${p.tp[i]?'checked':''} onchange="tg('${id}',${i},this.checked)">${esc(t)}</label>`).join('')}</div>
+<h2>Mandatory verification</h2>
+<div class="cd">${hd('1. Concept',s[0])}${ck('c','Concept understood')}</div>
+<div class="cd">${hd('2. Notes',s[1])}${ck('n','Notes made')}</div>
+<div class="cd">${hd('3. 100 MCQs',s[2])}<div class="big">${m} / 100</div>${bar(m)}<div class="fl"><button class="g" onclick="mq('${id}',${m-1})">−1</button><button class="g" onclick="mq('${id}',${m+1})">+1</button><button class="g" onclick="mq('${id}',${m+5})">+5</button><input type="number" min="0" max="100" value="${m}" style="width:80px" onchange="mq('${id}',this.value)"></div></div>
+<div class="cd">${hd('4. PYQs',s[3])}${ck('y','Previous-year questions completed')}<input placeholder="PYQ note (difficult question numbers…)" value="${esc(p.yn)}" onchange="set('${id}','yn',this.value)"></div>
+<div class="cd">${hd('5. Chapter Test',s[4])}<div class="sm">Pass mark ${thr}% · attempts ${ts.length} · latest ${last?Math.round(last.pct)+'%':'—'} · best ${best!=null?Math.round(best)+'%':'—'}</div>
+<div class="g2"><input id="tq" type="number" placeholder="Questions"><input id="ts" type="number" placeholder="Score"><input id="tm" type="number" placeholder="Minutes"><input id="td" type="date" value="${tdy()}"></div><input id="tw" placeholder="Weak topics (comma separated)"><button onclick="tAdd('${id}')">Record attempt</button>
+${ts.map((t,i)=>`<div class="sm" style="margin-top:6px">${esc(t.d)} · ${t.s}/${t.q} = <b class="${t.pct>=thr?'ok':'bd'}">${Math.round(t.pct)}%</b> · ${t.tm}m ${t.wk?'· '+esc(t.wk):''} <a href="#" onclick="tdel('${id}',${i});return false">delete</a></div>`).reverse().join('')}</div>
+${wt.length?`<p>${wt.map(w=>`<span class="tag bd">weak: ${esc(w)}</span>`).join('')}</p>`:''}
+<h2>Revision ${n<5?'(locked until DONE)':''}</h2><div class="cd">${[0,1,2].map(i=>`<label class="ck"><input type="checkbox" ${p.r[i]?'checked':''} ${n<5?'disabled':''} onchange="rv('${id}',${i},this.checked)">Revision ${i+1}</label>`).join('')}</div>
+<h2>Mistakes (${mk.length} unresolved)</h2>${mk.map(o=>`<div class="cd"><span class="tag">${o.m.ty}</span>${esc(o.m.tp)} <span class="sm">${esc(o.m.rf)} ${esc(o.m.nt)}</span><label class="ck"><input type="checkbox" onchange="xr(${o.i},this.checked)">Resolved</label></div>`).join('')}<button class="g" onclick="mfc='${id}';go('mist')">Log a mistake</button>
+<h2>Notes</h2><textarea rows="4" onchange="set('${id}','nt',this.value)">${esc(p.nt)}</textarea>`}
+function tests(){let l=allT().filter(t=>!TF||t.sid==TF);l.sort((a,b)=>TS=='p'?b.pct-a.pct:String(b.d).localeCompare(String(a.d)));
+return `<div class="fl"><select onchange="TF=this.value;render()">${opt([['','All subjects'],...S.map(s=>[s.id,s.name]),['mock','Full mocks']],TF)}</select><select onchange="TS=this.value;render()">${opt([['d','Newest first'],['p','Highest score']],TS)}</select></div>
+${l.length?l.map(tr).join(''):'<p class="sm">No tests yet. Record chapter tests inside a chapter, or add a full mock below.</p>'}
+<h2>Add full-length mock</h2><div class="cd"><input id="mn" placeholder="Mock name"><div class="g2"><input id="mq" type="number" placeholder="Questions"><input id="ms" type="number" placeholder="Score"><input id="mt" type="number" placeholder="Minutes"><input id="md" type="date" value="${tdy()}"></div><input id="mw" placeholder="Weak topics"><button onclick="mAdd()">Save mock</button></div>`}
+function mist(){const f=MF,cs=C.map(c=>[c.id,c.sn+' · '+c.name]),l=D.mk.map((m,i)=>({m,i})).filter(o=>(!f.s||CM[o.m.c].sid==f.s)&&(!f.c||o.m.c==f.c)&&(!f.t||o.m.ty==f.t)&&(!f.r||(f.r=='r')==!!o.m.r));
+return `<div class="cd"><b>Log a mistake</b><select id="xc">${opt(cs,mfc)}</select><input id="xt" placeholder="Topic"><select id="xy">${opt(TY.map(t=>[t,t]))}</select><input id="xr" placeholder="Question / reference"><textarea id="xn" rows="2" placeholder="Your note"></textarea><button onclick="xAdd()">Save mistake</button></div>
+<div class="fl"><select onchange="MF.s=this.value;render()">${opt([['','Subject'],...S.map(s=>[s.id,s.name])],f.s)}</select><select onchange="MF.c=this.value;render()">${opt([['','Chapter'],...cs],f.c)}</select><select onchange="MF.t=this.value;render()">${opt([['','Type'],...TY.map(t=>[t,t])],f.t)}</select><select onchange="MF.r=this.value;render()">${opt([['','All'],['u','Unresolved'],['r','Resolved']],f.r)}</select></div>
+${l.length?l.map(o=>`<div class="cd"><span class="tag">${o.m.ty}</span><b>${esc(CM[o.m.c].name)}</b> <span class="sm">${esc(o.m.tp)} · ${o.m.d}</span><br><span class="sm">${esc(o.m.rf)} ${esc(o.m.nt)}</span><div class="fl"><label class="ck"><input type="checkbox" ${o.m.r?'checked':''} onchange="xr(${o.i},this.checked)">Resolved</label><a href="#" onclick="xd(${o.i});return false">delete</a></div></div>`).join(''):'<p class="sm">No mistakes match.</p>'}`}
+function expo(){$('#io').value=JSON.stringify(D,null,1);try{navigator.clipboard.writeText($('#io').value)}catch(e){}toast('Backup shown below — copy and keep it')}
+function impo(){try{const j=JSON.parse($('#io').value);if(!j||typeof j.p!='object'||!Array.isArray(j.mk)||!j.st||typeof j.st.thr!='number')throw 0;D={...fresh(),...j};save();th();render();toast('Imported')}catch(e){toast('Invalid backup JSON')}}
+function rst(){if($('#rs').value=='RESET'){D=fresh();save();th();render();toast('All progress reset')}else toast('Type RESET to confirm')}
+function sett(){return `<div class="cd"><b>Theme</b><select onchange="D.st.theme=this.value;save();th()">${opt([['system','System'],['light','Light'],['dark','Dark']],D.st.theme)}</select></div>
+<div class="cd"><b>Chapter Test pass mark (%)</b><input type="number" min="1" max="100" value="${D.st.thr}" onchange="D.st.thr=Math.max(1,Math.min(100,+this.value||80));save();render()"></div>
+<div class="cd"><b>Backup</b><div class="sm">Export shows your JSON below. To restore, paste a backup and import.</div><textarea id="io" rows="5"></textarea><div class="fl"><button onclick="expo()">Export progress</button><button class="g" onclick="impo()">Import progress</button></div></div>
+<div class="cd"><b>Syllabus version</b><br>2026 baseline (student-supplied DCECE-PE syllabus)<div class="sm">2027 update: when the official prospectus is out, edit the syllabus data (S and X) only. Progress is stored separately by stable chapter IDs, so it is kept.</div></div>
+<div class="cd"><b class="bd">Reset all progress</b><input id="rs" placeholder="Type RESET to confirm"><button onclick="rst()" style="background:var(--bd)">Reset everything</button></div>`}
+function render(){$('#app').innerHTML=st.ch?chap(st.ch):({dash,syl,tests,mist,set:sett})[st.v]();
+$('#nv').innerHTML=[['dash','Dashboard'],['syl','Syllabus'],['tests','Tests'],['mist','Mistakes'],['set','Settings']].map(([v,l])=>`<button class="${st.v==v?'on':''}" onclick="go('${v}')">${l}</button>`).join('')}
+th();render();
+</script></body></html>
